@@ -5,5 +5,5 @@ Group interaction on sepolia testnet: https://docs.google.com/spreadsheets/d/1LE
 Participants:
 
 - l0hxPm - Juantxu. Link: [Homework](juantxu-contract-interactions.md)
-- ky6YXu - cryptodabbler. Link: [Homework]([cryptodabbler-contract-interactions.md](https://github.com/jmagan/evm-bootcamp-week01-hw/blob/main/cryptodabbler-contract-interactions.md))
+- ky6YXu - cryptodabbler. Link: [Homework](cryptodabbler-contract-interactions.md)
 - 
