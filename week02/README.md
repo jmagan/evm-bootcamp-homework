@@ -1,13 +1,5 @@
-# Sample Hardhat Project
+# Homework 2 - Ballot smart contract (Group 6)
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a Hardhat Ignition module that deploys that contract.
+All the interactions are registred in the following spreadsheet:
 
-Try running some of the following tasks:
-
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat ignition deploy ./ignition/modules/Lock.ts
-```
+https://docs.google.com/spreadsheets/d/1P_LV1TY4d-n4d6JWWYEjrlbRiPV-h9o2luSF1WvFt-0/edit?usp=sharing
