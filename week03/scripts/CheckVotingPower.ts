@@ -1,21 +1,12 @@
 import {
-  createPublicClient,
-  createWalletClient,
   formatEther,
   parseEther,
   Hex,
   hexToString,
   http,
 } from "viem";
-import { sepolia } from "viem/chains";
-import * as dotenv from "dotenv";
-import { mnemonicToAccount, privateKeyToAccount } from "viem/accounts";
 import { abi, bytecode } from "../artifacts/contracts/MyERC20Votes.sol/MyToken.json";
-
-dotenv.config();
-
-const providerApiKey = process.env.ALCHEMY_API_KEY || "";
-const privateKey = process.env.PRIVATE_KEY || "";
+import { getClientsAccts } from "./sharedUtils";
 
 // contract address 0xE366C5a151e568eCBC46894E0791E8327b5310f8
 // npx ts-node --files ./scripts/CheckVotingPower.ts 0xE366C5a151e568eCBC46894E0791E8327b5310f8 <wallet address - optional, get address from private key in .env if not given>
@@ -28,12 +19,9 @@ async function main() {
     if (!/^0x[a-fA-F0-9]{40}$/.test(contractAddress))
         throw new Error("Invalid contract address");
 
-    const publicClient = createPublicClient({
-        chain: sepolia,
-        transport: http(`https://eth-sepolia.g.alchemy.com/v2/${providerApiKey}`),
-    });
+    const { publicClient, account, deployer } = getClientsAccts();
     const blockNumber = await publicClient.getBlockNumber();
-    console.log("Last block number: ", blockNumber);
+    console.log("Public client created. Last block number: ", blockNumber);
 
     let acctAddress : string;
     if (parameters.length >= 2) {
@@ -41,12 +29,6 @@ async function main() {
         console.log("Checking voting power of address:", acctAddress);
     }
     else {
-        const account = privateKeyToAccount(`0x${privateKey}`);
-        const deployer = createWalletClient({
-            account,
-            chain: sepolia,
-            transport: http(`https://eth-sepolia.g.alchemy.com/v2/${providerApiKey}`),
-        });
         acctAddress = deployer.account.address;
         console.log("Checking voting power of Deployer address:", acctAddress);
     }
