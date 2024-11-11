@@ -27,7 +27,7 @@ contract TokenizedBallot {
         // TODO: Validate if targetBlockNumber is in the past
         require(
             _targetBlockNumber < block.number,
-            string.concat("Error: target block number ",Strings.toString(_targetBlockNumber)," is not in the past")
+            string.concat("Error: target block number ",Strings.toString(_targetBlockNumber)," is not in the past, should be less than", Strings.toString(block.number))
         );
         targetBlockNumber = _targetBlockNumber;
         for (uint i = 0; i < _proposalNames.length; i++) {
