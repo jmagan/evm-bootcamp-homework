@@ -48,7 +48,7 @@ async function main() {
 
     console.log(
       `Transferor account ${deployer.account.address}
-      has ${votes1.toString()} units of voting power after sending the transfer\n`
+      has ${formatEther(votes1)} units of voting power after sending the transfer\n`
     );
 
     // Checking vote power - transferee address
@@ -61,7 +61,7 @@ async function main() {
 
     console.log(
       `Transferee account ${addrTransfer}
-      has ${votes2.toString()} units of voting power after receiving the transfer\n`
+      has ${formatEther(votes2)} units of voting power after receiving the transfer\n`
     );
 
 
