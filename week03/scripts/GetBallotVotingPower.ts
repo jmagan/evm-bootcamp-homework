@@ -42,7 +42,7 @@ async function main() {
     })) as bigint;
     console.log(
       `Account ${acctAddress}
-      has ${votes.toString()} units of voting power\n`
+      has ${formatEther(votes)} units of voting power\n`
     );
 
 }
