@@ -5,7 +5,7 @@ All the interactions are registered in the following spreadsheet:
 [https://docs.google.com/spreadsheets/d/1P_LV1TY4d-n4d6JWWYEjrlbRiPV-h9o2luSF1WvFt-0/edit?usp=sharing](https://docs.google.com/spreadsheets/d/1QB2mHbqejbi9BmbjcsVLlZZSc_FGzchGew3iYJSNy74/edit?usp=sharing)
 
 
-## Interactions/Commands Run
+## Representative Commands Run
 
 ```
 # deployed ERC20 votes token contract to address 0xE366C5a151e568eCBC46894E0791E8327b5310f8
