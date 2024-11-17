@@ -14,8 +14,8 @@ const openStdin = function () {
   return process.stdin;
 };
 
-// contract address 0xB02Ee3F354dE80D8C421cd383e8299b1569B3d20
-// npx ts-node --files ./scripts/CastVote.ts 0xB02Ee3F354dE80D8C421cd383e8299b1569B3d20 <proposal # to vote for> <amount of votes to cast>
+// contract address 0x929c3b2856b9f5a26e52563d87a8f96e2eed1a64
+// npx ts-node --files ./scripts/CastVote.ts 0x929c3b2856b9f5a26e52563d87a8f96e2eed1a64 <proposal # to vote for> <amount of votes to cast>
 async function main() {
     const parameters = process.argv.slice(2);
     if (!parameters || parameters.length < 3)
