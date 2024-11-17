@@ -2,12 +2,13 @@
 pragma solidity >=0.7.0 <0.9.0;
 
 import "@openzeppelin/contracts/utils/Strings.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
 interface IMyToken {
     function getPastVotes(address, uint256) external view returns (uint256);
 }
 
-contract TokenizedBallot {
+contract TokenizedBallot is Ownable {
     struct Proposal {
         bytes32 name;
         uint voteCount;
@@ -22,14 +23,15 @@ contract TokenizedBallot {
         bytes32[] memory _proposalNames,
         address _tokenContract,
         uint256 _targetBlockNumber
-    ) {
+    ) Ownable(msg.sender) {
         tokenContract = IMyToken(_tokenContract);
-        // TODO: Validate if targetBlockNumber is in the past
+        // Validate if targetBlockNumber is in the past
         require(
             _targetBlockNumber < block.number,
             string.concat("Error: target block number ",Strings.toString(_targetBlockNumber)," is not in the past, should be less than", Strings.toString(block.number))
         );
         targetBlockNumber = _targetBlockNumber;
+
         for (uint i = 0; i < _proposalNames.length; i++) {
             proposals.push(Proposal({name: _proposalNames[i], voteCount: 0}));
         }
@@ -40,6 +42,10 @@ contract TokenizedBallot {
         require(
             votePower >= amount,
             "Error: trying to vote with more votes than available"
+        );
+        require(
+            (proposal >= 0) && (proposal < proposals.length),
+            string.concat("Invalid proposal number",Strings.toString(proposal),". Enter a proposal number between 0 and ",Strings.toString(proposals.length))
         );
         votePowerSpent[msg.sender] += amount;
         proposals[proposal].voteCount += amount;
@@ -63,4 +69,14 @@ contract TokenizedBallot {
     function winnerName() external view returns (bytes32 winnerName_) {
         winnerName_ = proposals[winningProposal()].name;
     }
+
+    function setTargetBlockNumber(uint256 _targetBlockNumber) public onlyOwner {
+        // Validate if targetBlockNumber is in the past
+        require(
+            _targetBlockNumber < block.number,
+            string.concat("Error: target block number ",Strings.toString(_targetBlockNumber)," is not in the past, should be less than ", Strings.toString(block.number))
+        );
+        targetBlockNumber = _targetBlockNumber;
+    }
+
 }
