@@ -8,8 +8,8 @@ import {
 import { abi, bytecode } from "../artifacts/contracts/TokenizedBallot.sol/TokenizedBallot.json";
 import { getClientsAccts } from "./sharedUtils";
 
-// contract address 0xB02Ee3F354dE80D8C421cd383e8299b1569B3d20
-// npx ts-node --files ./scripts/WinningProposal.ts 0xB02Ee3F354dE80D8C421cd383e8299b1569B3d20
+// contract address 0x929c3b2856b9f5a26e52563d87a8f96e2eed1a64
+// npx ts-node --files ./scripts/WinningProposal.ts 0x929c3b2856b9f5a26e52563d87a8f96e2eed1a64
 async function main() {
     const parameters = process.argv.slice(2);
     if (!parameters || parameters.length < 1)
@@ -43,7 +43,7 @@ async function main() {
     const voteCount = proposal[1];
 
     console.log(`Winning Proposal: ${name}`);
-    console.log(`Vote Count: ${voteCount}`);
+    console.log(`Vote Count: ${formatEther(voteCount)}`);
 
 }
 
