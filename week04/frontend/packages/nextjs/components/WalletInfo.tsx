@@ -1,5 +1,6 @@
 "use client";
 
+import ApiData from "./ApiData";
 import TokenInfo from "./TokenInfo";
 import WalletAction from "./WalletAction";
 import WalletBalance from "./WalletBalance";
@@ -15,6 +16,7 @@ function WalletInfo() {
         <WalletAction></WalletAction>
         <WalletBalance address={address as `0x${string}`}></WalletBalance>
         <TokenInfo address={address as `0x${string}`}></TokenInfo>
+        <ApiData address={address as `0x${string}`}></ApiData>
       </div>
     );
   if (isConnecting)

@@ -1,5 +1,4 @@
 import type { NextPage } from "next";
-import { useAccount } from "wagmi";
 import WalletInfo from "~~/components/WalletInfo";
 
 const Home: NextPage = () => {
