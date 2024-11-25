@@ -32,7 +32,7 @@ export class AppService {
   }
 
   getContractAddress(): string {
-    return '0xE366C5a151e568eCBC46894E0791E8327b5310f8';
+    return process.env.TOKEN_ADDRESS;
   }
 
   async getTokenName(): Promise<string> {
@@ -48,6 +48,7 @@ export class AppService {
     return this.walletClient.account.address;
   }
 
+  // TODO
   async checkMinterRole(address: string): Promise<boolean> {
     const MINTER_ROLE =
       '0x9f2df0fed2c77648de5860a4cc508cd0818c85b8b8a1ab4ceeef8d981c8956a6';
@@ -65,6 +66,7 @@ export class AppService {
     return hasRole as boolean;
   }
 
+  // TODO
   mintTokens(address: string) {
     return { result: true };
   }
@@ -92,7 +94,25 @@ export class AppService {
 
     return `${formatEther(balanceOf as bigint)} ${symbol}`;
   }
+
+
   getTotalSupply() {
-    throw new Error('Method not implemented.');
+    const apiKey = process.env.ALCHEMY_API_KEY;
+    const publicClient = createPublicClient({
+      chain: sepolia,
+      transport: http(`https://eth-sepolia.g.alchemy.com/v2/${apiKey}`),
+    });
+    const symbol = await this.publicClient.readContract({
+      address: this.getContractAddress() as `0x${string}`,
+      abi: tokenJson.abi,
+      functionName: 'symbol',
+    });
+    const totalSupply = await this.publicClient.readContract({
+      address: this.getContractAddress() as `0x${string}`,
+      abi: tokenJson.abi,
+      functionName: 'totalSupply',
+    });
+    return `${formatEther(totalSupply as bigint)} ${symbol}`;
   }
+
 }
