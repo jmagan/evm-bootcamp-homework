@@ -18,7 +18,7 @@ function CastVote(params: { ballotContractAddress: `0x${string}`; voterAddress: 
     args: [voterAddress.toLocaleLowerCase()],
   });
 
-  const { writeContract, error: voteError } = useWriteContract();
+  const { writeContract, error: voteError, status } = useWriteContract();
 
   const proposals = [
     "proposal1",
@@ -71,7 +71,7 @@ function CastVote(params: { ballotContractAddress: `0x${string}`; voterAddress: 
               </label>
             </div>
           ))}
-          <button disabled={isLoading} className="btn" onClick={() => vote()}>
+          <button disabled={isLoading || status !== "idle"} className="btn" onClick={() => vote()}>
             Vote
           </button>
           {voteError && <p>Error: {voteError.message}</p>}
