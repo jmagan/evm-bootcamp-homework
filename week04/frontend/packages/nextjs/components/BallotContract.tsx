@@ -1,16 +1,22 @@
 "use client";
 
 import CastVote from "./CastVote";
+import MintVoteTokens from "./MintVoteTokens";
 import { useAccount } from "wagmi";
 
 function BallotContract() {
   const { address, isConnecting, isDisconnected } = useAccount();
-  const ballotContractAddress: `0x${string}` = "0x929c3b2856b9f5a26e52563d87a8f96e2eed1a64";
-  const tokenERC20ContractAddress: `0x${string}` = "0xE366C5a151e568eCBC46894E0791E8327b5310f8";
+  const ballotContractAddress: `0x${string}` = "0x5999b38cb92947cdfce62ce27ca34941c52e490f";
+  const tokenERC20ContractAddress: `0x${string}` = "0x30f7ca5ba20ee2b384e630298a762319da521835";
   if (address)
     return (
-      <div>
+      <div className="flex flex-row gap-2">
         <CastVote ballotContractAddress={ballotContractAddress} voterAddress={address as `0x${string}`} />
+        <MintVoteTokens
+          tokenERC20ContractAddress={tokenERC20ContractAddress}
+          voterAddress={address as `0x${string}`}
+          ballotContractAddress={ballotContractAddress}
+        />
       </div>
     );
   if (isConnecting)

@@ -1,4 +1,5 @@
 import "@rainbow-me/rainbowkit/styles.css";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ScaffoldEthAppWithProviders } from "~~/components/ScaffoldEthAppWithProviders";
 import { ThemeProvider } from "~~/components/ThemeProvider";
 import "~~/styles/globals.css";
@@ -14,7 +15,10 @@ const ScaffoldEthApp = ({ children }: { children: React.ReactNode }) => {
     <html suppressHydrationWarning>
       <body>
         <ThemeProvider enableSystem>
-          <ScaffoldEthAppWithProviders>{children}</ScaffoldEthAppWithProviders>
+          <ScaffoldEthAppWithProviders>
+            <ReactQueryDevtools initialIsOpen={false} />
+            {children}
+          </ScaffoldEthAppWithProviders>
         </ThemeProvider>
       </body>
     </html>

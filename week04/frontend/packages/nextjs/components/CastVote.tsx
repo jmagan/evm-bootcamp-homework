@@ -1,22 +1,13 @@
 import { useCallback, useState } from "react";
 import { formatEther } from "viem";
-import { useCall, useReadContract, useWriteContract } from "wagmi";
-import { writeContract } from "wagmi/actions";
+import { useWriteContract } from "wagmi";
 import * as ballotContractAbi from "~~/assets/TokenizedBallot.json";
+import useQueryVotingPower from "~~/hooks/useQueryVotingPower";
 
 function CastVote(params: { ballotContractAddress: `0x${string}`; voterAddress: `0x${string}` }) {
   const { ballotContractAddress, voterAddress } = params;
 
-  const {
-    data: votePower,
-    error,
-    isLoading,
-  } = useReadContract({
-    address: ballotContractAddress,
-    abi: ballotContractAbi.abi,
-    functionName: "getVotePower",
-    args: [voterAddress.toLocaleLowerCase()],
-  });
+  const { votePower, isLoading, error } = useQueryVotingPower(ballotContractAddress, voterAddress);
 
   const { writeContract, error: voteError, status } = useWriteContract();
 
@@ -52,9 +43,7 @@ function CastVote(params: { ballotContractAddress: `0x${string}`; voterAddress: 
       <div className="card w-96 bg-primary text-primary-content mt-4">
         <div className="card-body">
           <h2 className="card-title">Cast your vote</h2>
-          <h3 className="card-title">
-            Your vote power: {!isLoading ? formatEther(votePower as bigint) : "Loading..."}
-          </h3>
+          <p>Your vote power: {!isLoading ? formatEther(votePower as bigint) : "Loading..."}</p>
           {error && <p>Error: {error.message}</p>}
           {proposals.map((proposal, index) => (
             <div className="form-control" key={index}>

@@ -2305,6 +2305,7 @@ __metadata:
     "@heroicons/react": ^2.1.5
     "@rainbow-me/rainbowkit": 2.1.6
     "@tanstack/react-query": ^5.59.15
+    "@tanstack/react-query-devtools": 5
     "@trivago/prettier-plugin-sort-imports": ^4.3.0
     "@types/node": ^18.19.50
     "@types/react": ^18.3.5
@@ -2634,6 +2635,25 @@ __metadata:
   version: 5.59.13
   resolution: "@tanstack/query-core@npm:5.59.13"
   checksum: 2f43f53ecd0151c9f83f822f47a8c882cce234ece2fa4fc575ae1bf865094ff145f5efe7cb9c750541df143804941248aceaf85e7c5346a7897d896845996dff
+  languageName: node
+  linkType: hard
+
+"@tanstack/query-devtools@npm:5.61.3":
+  version: 5.61.3
+  resolution: "@tanstack/query-devtools@npm:5.61.3"
+  checksum: e93f4cc01fd21e2f11d36258a53c00b9f2fe5dff4afd6c2f1b55ee7330a11e46f2c9bc271246ebba04f72f0bf93d53cc762301873244068977755195caf8476e
+  languageName: node
+  linkType: hard
+
+"@tanstack/react-query-devtools@npm:5":
+  version: 5.61.3
+  resolution: "@tanstack/react-query-devtools@npm:5.61.3"
+  dependencies:
+    "@tanstack/query-devtools": 5.61.3
+  peerDependencies:
+    "@tanstack/react-query": ^5.61.3
+    react: ^18 || ^19
+  checksum: 814ff5a00454235ab574c86c4d4db5d85cf0d1cb05f42c9242c0f4f1fdf935b639c4abdd597df6283eba312a9a8e7c96b664914754271f5d6198ed16de14e52e
   languageName: node
   linkType: hard
 
