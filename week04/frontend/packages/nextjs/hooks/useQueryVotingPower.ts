@@ -17,7 +17,7 @@ function useQueryVotingPower(ballotContractAddress: `0x${string}`, voterAddress:
   });
 
   const queryClient = useQueryClient();
-  const { data: blockNumber } = useBlockNumber({ watch: true });
+  const { data: blockNumber } = useBlockNumber({ watch: { enabled: true, poll: true, pollingInterval: 5000 } });
 
   useEffect(() => {
     queryClient.invalidateQueries({ queryKey: votingPowerQueryKey });
