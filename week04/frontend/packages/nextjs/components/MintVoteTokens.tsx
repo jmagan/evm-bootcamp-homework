@@ -18,20 +18,24 @@ function MintVoteTokens(params: {
     status: setBlockNumberStatus,
   } = useWriteContract();
 
-  const mintTokens = useCallback(() => {
-    mintAction({
-      address: tokenERC20ContractAddress,
-      abi: tokenERC20ContractAbi.abi,
-      functionName: "mint",
-      args: [voterAddress, 100n * 10n ** 18n],
-    });
-
-    delegateAction({
-      address: tokenERC20ContractAddress,
-      abi: tokenERC20ContractAbi.abi,
-      functionName: "delegate",
-      args: [voterAddress],
-    });
+  const mintTokens = useCallback(async () => {
+    mintAction(
+      {
+        address: tokenERC20ContractAddress,
+        abi: tokenERC20ContractAbi.abi,
+        functionName: "mint",
+        args: [voterAddress, 100n * 10n ** 18n],
+      },
+      {
+        onSettled: () =>
+          delegateAction({
+            address: tokenERC20ContractAddress,
+            abi: tokenERC20ContractAbi.abi,
+            functionName: "delegate",
+            args: [voterAddress],
+          }),
+      },
+    );
   }, [delegateAction, mintAction, tokenERC20ContractAddress, voterAddress]);
 
   const { data: blockNumber } = useBlockNumber({ watch: true });

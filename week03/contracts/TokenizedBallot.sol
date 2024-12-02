@@ -28,7 +28,12 @@ contract TokenizedBallot is Ownable {
         // Validate if targetBlockNumber is in the past
         require(
             _targetBlockNumber < block.number,
-            string.concat("Error: target block number ",Strings.toString(_targetBlockNumber)," is not in the past, should be less than", Strings.toString(block.number))
+            string.concat(
+                "Error: target block number ",
+                Strings.toString(_targetBlockNumber),
+                " is not in the past, should be less than",
+                Strings.toString(block.number)
+            )
         );
         targetBlockNumber = _targetBlockNumber;
 
@@ -45,7 +50,12 @@ contract TokenizedBallot is Ownable {
         );
         require(
             (proposal >= 0) && (proposal < proposals.length),
-            string.concat("Invalid proposal number",Strings.toString(proposal),". Enter a proposal number between 0 and ",Strings.toString(proposals.length))
+            string.concat(
+                "Invalid proposal number",
+                Strings.toString(proposal),
+                ". Enter a proposal number between 0 and ",
+                Strings.toString(proposals.length)
+            )
         );
         votePowerSpent[msg.sender] += amount;
         proposals[proposal].voteCount += amount;
@@ -53,9 +63,10 @@ contract TokenizedBallot is Ownable {
 
     function getVotePower(address voter) public view returns (uint256) {
         return
-            tokenContract.getPastVotes(voter, targetBlockNumber) - votePowerSpent[msg.sender];
+            tokenContract.getPastVotes(voter, targetBlockNumber) -
+            votePowerSpent[voter];
     }
-    
+
     function winningProposal() public view returns (uint winningProposal_) {
         uint winningVoteCount = 0;
         for (uint p = 0; p < proposals.length; p++) {
@@ -74,9 +85,13 @@ contract TokenizedBallot is Ownable {
         // Validate if targetBlockNumber is in the past
         require(
             _targetBlockNumber < block.number,
-            string.concat("Error: target block number ",Strings.toString(_targetBlockNumber)," is not in the past, should be less than ", Strings.toString(block.number))
+            string.concat(
+                "Error: target block number ",
+                Strings.toString(_targetBlockNumber),
+                " is not in the past, should be less than ",
+                Strings.toString(block.number)
+            )
         );
         targetBlockNumber = _targetBlockNumber;
     }
-
 }

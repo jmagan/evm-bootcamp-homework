@@ -6,8 +6,8 @@ import { useAccount } from "wagmi";
 
 function BallotContract() {
   const { address, isConnecting, isDisconnected } = useAccount();
-  const ballotContractAddress: `0x${string}` = "0x5999b38cb92947cdfce62ce27ca34941c52e490f";
-  const tokenERC20ContractAddress: `0x${string}` = "0x30f7ca5ba20ee2b384e630298a762319da521835";
+  const ballotContractAddress: `0x${string}` = "0x36c167074d7794935f63f68406065e7e7a9d60c7";
+  const tokenERC20ContractAddress: `0x${string}` = "0x7204e456e73b9e1a9aa041b77ffe56512bd11534";
   if (address)
     return (
       <div className="flex flex-row gap-2">
